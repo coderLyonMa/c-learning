@@ -12,8 +12,8 @@ int main()
 
     // get char loop
     while ((c = getchar()) != EOF) {
-        // if any of following char is encountered, prt new line
-        if (c == ' ' || c == '\t' || c == '.' || c == ',' || c == ':')
+        // if any of following char is encountered, prt new line instead
+        if (c == ' ' || c == '\n' || c == '\t' || c == '.' || c == ',' || c == ':')
             printf("\n");
         else
             putchar(c);
