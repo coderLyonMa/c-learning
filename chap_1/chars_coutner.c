@@ -7,6 +7,9 @@ int main()
     char c;
     long num_c_bucket[10];
 
+    for (int i = 0; i <= 9; i++)
+        num_c_bucket[i] = 0;
+
     // input loop
     while ((c = getchar()) != EOF) {
         total_c++;
@@ -32,6 +35,6 @@ int main()
     printf("\n");
     printf("---------And numeric chars statistic show as below-----------------\n");
     for (int i = 0; i <= 9; i++)
-        printf("%ld number [%d] input\n", num_c_bucket[i], i);
+        printf("number [%d] input: %ld\n", i, num_c_bucket[i]);
 
 }
