@@ -12,7 +12,7 @@ int main()
     char h_2[] = "0X0001";
     char h_3[] = "0xQQQQ";
     char h_4[] = "0x1F2B3c";
-    char h_5[] = "01F2B3c";
+    char h_5[] = "01F2 B3c";
     char h_6[] = "0x1F2B3c00";
 
 
@@ -26,32 +26,35 @@ int main()
 
 int htoi(char s[])
 {
-    int i, c, h;
-    i = h = 0;
-    
-    while ((c = s[i]) != '\0') {
-        int add_up = 0;
-        if (c == '0' && i == 0) {
-            i++;
-            continue;
-        }
-        if (i == 1) {
-            if (c != 'x' && c != 'X')
-                return 0;
-            i++;
-            continue;
-        }
-        if (c >= 'a' && c <= 'f')
-            add_up = (c - 'a') + 10;
-        else if (c >= 'A' && c <= 'F')
-            add_up = (c - 'A') + 10;
-        else if (c >= '0' && c <= '9')
-            add_up = c - '0';
+    int i, decimal;
+    i = decimal = 0;
+    char upper[] = "0X";
+    char lower[] = "0x";
+
+    // 匹配hex前缀
+    for (i = 0; (s[i] == upper[i] || s[i] == lower[i]) && i < 2; i++)
+        ;
+    // 如果未匹配
+    if (i != 2)
+        return 0;
+
+    while (s[i] != '\0') {
+        int hex = 0;
+
+        if (s[i] >= 'a' && s[i] <= 'f')
+            hex = (s[i] - 'a') + 10;
+        else if (s[i] >= 'A' && s[i] <= 'F')
+            hex = (s[i] - 'A') + 10;
+        else if (s[i] >= '0' && s[i] <= '9')
+            hex = s[i] - '0';
         else
-            return 0;
-        h = 16 * h + add_up;
+            hex = 0;
+
+        if (s[i] == '\0')
+            return decimal;
+
+        decimal = decimal * 16 + hex;
         i++;
     }
-    return h;
-        
+    return decimal;   
 }
