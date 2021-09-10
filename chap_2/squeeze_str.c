@@ -9,10 +9,10 @@ int main()
     char c[] = "Ok computer";
     char d[] = "This world is a fine place";
 
-    squeeze(a, "ll");
-    squeeze(b, "go");
-    squeeze(c, "t");
-    squeeze(d, "is");
+    squeeze(a, "eo");
+    squeeze(b, "ge");
+    squeeze(c, "mp");
+    squeeze(d, "ia");
     
     printf("squeezed:%s\t\n", a);
     printf("squeezed:%s\t\n", b);
@@ -22,13 +22,15 @@ int main()
 
 void squeeze(char s1[], char s2[])
 {
+
     int i, j, k;
-    // i负责向后遍历
-    for (i = 0; s_1[i] != '\0'; i++)
-        for (j = i, k = 0; s_1[j] == s_2[k]; j++, k++)
-            if (s_2[k] == '\0' && k) {
-                i += j;
-        }
-        s_1[i] = s_2[k]
-    s[j] = '\0';
+
+    for (k = i = 0; s1[i] != '\0'; i++) {
+        // 先写边界条件
+        for (j = 0; s2[j] != '\0' && s1[i] != s2[j]; j++)
+            ;
+        if (s2[j] == '\0')
+            s1[k++] = s1[i];
+    }
+    s1[k] = '\0';
 }
