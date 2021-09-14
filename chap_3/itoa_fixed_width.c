@@ -1,7 +1,10 @@
+#include <stdio.h>
 #include "reverse.c"
 
+void itoa(int a, char s[], int w);
 
-char itoa(int a, char s[])
+
+void itoa(int a, char s[], int w)
 {
     int i = 0;
     int c, sign;
@@ -22,6 +25,9 @@ char itoa(int a, char s[])
 
     if (sign < 0)
         s[i++] = '-';
+
+    for (; i < w; i++)
+        s[i] = ' ';
 
 
     //reverse(s);

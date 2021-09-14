@@ -1,8 +1,8 @@
-#include <string.h>
 #include "reverse.c"
 
+void itob(int a, char s[], int b);
 
-char atoi(int a, char s[])
+void itob(int a, char s[], int b)
 {
     int i = 0;
     int c, sign;
@@ -10,12 +10,15 @@ char atoi(int a, char s[])
     sign = a < 0 ? -1 : 1;
 
     do {
-        c = a % 10;
+        c = a % b;
+
 
         if (sign > 0)
             s[i] = c + '0';
         else
             s[i] = (0 - c) + '0';
+        if (c < b)
+            s[++i] = '1';
 
         i++;
 
@@ -30,4 +33,3 @@ char atoi(int a, char s[])
     reverse(s);
 
 }
-
