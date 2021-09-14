@@ -11,10 +11,12 @@ char atoi(int a, char s[])
 
     do {
         c = a % 10;
-        if (a >= 0)
+
+        if (sign > 0)
             s[i] = c + '0';
         else
             s[i] = (0 - c) + '0';
+
         i++;
 
     } while (a /= 10);
@@ -23,7 +25,9 @@ char atoi(int a, char s[])
         s[i++] = '-';
 
 
-    reverse(s);
+    //reverse(s);
     s[i] = '\0';
+    reverse(s);
 
 }
+

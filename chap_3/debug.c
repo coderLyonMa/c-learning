@@ -3,6 +3,9 @@
 
 int main()
 {
-    printf("%d", -324567 % 10);
+    int d_min = ~(~0U >> 1);
+
+
+    printf("%d", d_min % 10);
 
 }

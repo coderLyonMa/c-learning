@@ -6,7 +6,7 @@
 int main()
 {
     int i_a = 123456;
-    int i_b = -324567;
+    int i_b = ~(~0U >> 1) + 1;
     char s_a[MAXLEN];
     char s_b[MAXLEN];
 
