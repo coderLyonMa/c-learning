@@ -1,17 +1,19 @@
 #include <stdio.h>
-#include "reverse_example.c"
-#define STRLENMAX 1000
+#include "atoi_dowhile.c"
+#define MAXLEN 1000
+
 
 int main()
 {
-    char s_a[STRLENMAX] = "hello world!";
-    char s_b[STRLENMAX] = "ok google! ";
+    int i_a = 123456;
+    int i_b = -324567;
+    char s_a[MAXLEN];
+    char s_b[MAXLEN];
 
-    reverse(s_a);
-    reverse(s_b);
+    atoi(i_a, s_a);
+    atoi(i_b, s_b);
 
-    printf("%s\n", s_a);
-    printf("%s\n", s_b);
-
+    printf("%d\tconverted: %s\n", i_a, s_a);
+    printf("%d\tconverted: %s\n", i_b, s_b);
 }
 
