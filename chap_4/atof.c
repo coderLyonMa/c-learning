@@ -2,6 +2,13 @@
 
 double atof(char s[]);
 
+/*
+ float无法准确表示
+    char s_a[] = "-1234.567";
+    char s_b[] = "1234.567";
+ 这两组结果
+ */
+ 
 
 double atof(char s[])
 {
