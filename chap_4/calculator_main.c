@@ -5,6 +5,11 @@
 
 #define MAXOP 100
 
+/*
+关于外部变量，"calculator_stack.c" 中已经定义了 sp，这里的 int sp; 并没有重新‘定义’sp
+如果写成 int sp = 1; 就无法通过编译了
+ */
+int sp;
 
 int main()
 {
