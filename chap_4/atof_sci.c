@@ -41,7 +41,6 @@ double atof_sci(char s[])
         i++;
         e_sign = -1;
     }
-    printf("%d", e_sign);
 
     for (; isdigit(s[i]); i++)
         exp = exp * 10 + s[i] - '0';
