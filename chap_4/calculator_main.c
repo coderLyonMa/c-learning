@@ -1,19 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include "calculator_stack.c"
+#include "op.c"
 #include "atof_sci.c"
+
 #define MAXOP 100
-#define NUMBER '0'
-#define MAXVAL 100
-
-// 栈值
-double val[MAXVAL];
-// 栈指针
-int sp = 0;
-
-char getop(char s[]);
-void push(double f);
-double pop();
-
 
 
 int main()
@@ -57,50 +47,3 @@ int main()
 
     return 0;
 }
-
-
-char getop(char s[])
-{
-    int i = 0;
-    int c;
-
-    while ((c = getchar()) != EOF && c != '\n')
-        s[i++] = c;
-
-    if (c == '\n') {
-        s[i] = c;
-        i++;
-    }
-
-    s[i] = '\0';
-
-    for (i = 0; isdigit(s[i]); i++)
-        ;
-
-    if (i != 0 && s[i-1] >= '0' && s[i-1] <= '9')
-        return NUMBER;
-
-    if (s[i] == '\n')
-        return '\n';
-
-    return s[i];
-}
-
-
-void push(double f)
-{
-    if (sp < MAXVAL)
-        val[sp++] = f;
-    else
-        printf("error: stack full, can not push %g\n", f);
-}
-
-double pop()
-{
-    if (sp > 0)
-        return val[--sp];
-    else
-        printf("empty stack\n");
-        return 0.0;
-}
-
