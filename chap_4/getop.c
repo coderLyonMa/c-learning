@@ -1,9 +1,5 @@
 #include <ctype.h>
-
-#define NUMBER '0'
-
-
-char getop(char s[]);
+#include "calc.h"
 
 
 char getop(char s[])

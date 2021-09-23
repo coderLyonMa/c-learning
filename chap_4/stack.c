@@ -1,13 +1,9 @@
-#define NUMBER '0'
-#define MAXVAL 100
-
-void push(double f);
-double pop();
+#include "calc.h"
 
 // 栈值
-double val[MAXVAL];
+static double val[MAXVAL];
 // 栈指针
-int sp = 0;
+static int sp = 0;
 
 
 
