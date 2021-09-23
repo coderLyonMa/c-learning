@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../atof_sci.c"
-
 #include "calc.h"
-#include "stack.c"
-#include "getop.c"
-#include "getch.c"
 
 
 #define MAXOP 100

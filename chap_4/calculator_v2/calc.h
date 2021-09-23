@@ -1,3 +1,6 @@
+#ifndef CALC_BASE_H
+#define CALC_BASE_H
+
 #define NUMBER '0'
 
 
@@ -13,3 +16,4 @@ void swap();
 void cp_top();
 void reset();
 
+#endif

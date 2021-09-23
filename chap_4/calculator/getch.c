@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "calc.h"
 #define BUFFSIZE 100
 
 /* 始终指向空闲位置 */
