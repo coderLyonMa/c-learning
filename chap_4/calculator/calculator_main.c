@@ -1,15 +1,19 @@
 #include <stdio.h>
-#include "calculator_stack.c"
-#include "op.c"
+#include "stack.c"
+#include "getop.c"
 #include "atof_sci.c"
 
 #define MAXOP 100
 
 /*
+未差分多个文件的计算器程序
+ */
+
+/*
 关于外部变量，"calculator_stack.c" 中已经定义了 sp，这里的 int sp; 并没有重新‘定义’sp
 如果写成 int sp = 1; 就无法通过编译了
  */
-int sp;
+extern int sp;
 
 int main()
 {
