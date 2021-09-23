@@ -1,33 +1,31 @@
 #include <ctype.h>
 #include <stdio.h>
-#include "calc_v2.h"
-#include "getch.c"
+#include "calc.h"
 
 
-int getop(char s[])
+char getop(char s[])
 {
     static int i, c;
 
     // 如果是空白符，跳过
-    while ((s[0] = c = getch()) != ' ' && s[0] != '\t')
+    while ((s[0] = c = getch()) == ' ' || c == '\t')
         ;
+
+    s[1] = '\0';
 
     // op 有几种可能性：数字，算数操作符，换行符
     // pattern like '.1234' not supported 
-    if (!isdigit(s[0]))
-        return s[0];
+    if (!isdigit(c) && c != '.')
+        return c;
+    i = 0;
 
-    i++;
-
-    while (isdigit(c = getch()))
-        s[i++] = c;
+    if (isdigit(c))
+        while (isdigit(s[++i] = c = getch()))
+            ;
 
     if (c == '.')
-        s[i] = c;
-
-    while (isdigit(c = getch()))
-        s[i++] = c;
-
+        while (isdigit(s[++i] = c = getch()))
+            ;
     s[i] = '\0';
 
     if (c != EOF)

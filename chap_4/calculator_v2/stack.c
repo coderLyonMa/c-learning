@@ -1,12 +1,11 @@
-#include "calc.h"
 #include <stdio.h>
+#include "calc.h"
+#define MAXVAL 100
 
 // 栈值
 static double val[MAXVAL];
 // 栈指针
 static int sp = 0;
-
-
 
 
 void push(double f)

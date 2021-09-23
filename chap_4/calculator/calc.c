@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "atof_sci.c"
+#include "../atof_sci.c"
 #include "calc.h"
-#include "getop.c"
+#include "getop_v2.c"
 #include "stack.c"
 
 #define MAXOP 100
@@ -14,6 +14,7 @@ int main()
     char type, s[MAXOP];
 
     double op1, op2;
+    long lop1, lop2;
 
     while (type=getop(s)) {
         switch (type) {
@@ -38,8 +39,25 @@ int main()
                 else
                     printf("error: divide by zero");
                 break;
+            case '%':
+                lop1 = (long) pop();
+                lop2 = (long) pop();
+                push(lop2 % lop1);
+                break;
             case '\n':
                 printf("\t%.8g\n", pop());
+                break;
+            case 'p':
+                prt_top();
+                break;
+            case 's':
+                swap();
+                break;
+            case 'c':
+                cp_top();
+                break;
+            case 'r':
+                reset();
                 break;
             default:
                 printf("error: unknown command %s\n", s);
