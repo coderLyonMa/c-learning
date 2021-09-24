@@ -27,7 +27,7 @@ double pop()
     }
 }
 
-void prt_top()
+static void prt_top()
 {
     if (sp > 0)
         printf("stack pointer now is pointing: <%g>\n", val[sp - 1]);
