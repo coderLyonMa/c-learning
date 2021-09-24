@@ -30,6 +30,7 @@ int getint(int* pn)
     *pn = 0;
     int c;
 
+    // 一个循环就是一个监听
     while (isspace(c = getch()))
         ;
 
@@ -38,13 +39,24 @@ int getint(int* pn)
         return 0;
     }
 
+    if (c == EOF)
+        return c;
+
     int sign = c == '-' ? -1 : 1;
 
     //while (!isdigit(c = getch()))
     //    ; 这样写可能会跳过一个符合预期的字符
 
-    if (c == '-' || c == '+')
-        c = getch();
+    // 非常重要！！这里要读很多遍
+    //while (!isdigit(c) && !isdigit(c = getch())) {
+    //    if (c == '-' || c == '+')
+    //        ungetch(c);
+    //}
+
+    // bug case: input = - + 12345
+    if (!isdigit(c))
+        while (isspace(c = getch()))
+            ;
 
     for (c; isdigit(c); c = getch())
         *pn = *pn * 10 + c - '0';

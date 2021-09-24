@@ -12,7 +12,7 @@ int main()
     printf("before swap\n");
     dprint(a);
     dprint(b);
-    swap(&a, &b);
+    swap(a, b);
     printf("after swap\n");
 
     dprint(a);
