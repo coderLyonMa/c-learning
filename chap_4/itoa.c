@@ -1,40 +1,31 @@
 #include <stdio.h>
-#include <ctype.h>
+#include <stdlib.h> 
 #define SIZE 100
 
-char *itoa(int n, char *s);
+void itoa(int n, char s[]);
 
 int main()
 {
     char s_1[SIZE];
-    //itoa(12345, s_1);
-    printf("%s", itoa(12345, s_1));
+    itoa(-12345, s_1);
+    printf("%s", s_1);
 }
 
 
-char *itoa(int n, char *s)
+void itoa(int n, char s[])
 {
-    int stack = 0;
-    char *a;
+    static int i;
 
-    if (n / 10) {
-        stack++;
-        itoa(n / 10, s + 1);
+    /* baseline 个位数 */
+    if (n / 10 != 0)
+        itoa(n / 10, s);
+    else if (n < 0) {
+        s[0] = '-';
+        i++;
     }
-
-    if (stack == 0) {
-        *s = n % 10 + '0';
-        for (; isdigit(*s); s++)
-            ;
         
+    /* 将要取的10进制位，移动到个位 */    
 
-        while ((*a = *s)) {
-            a++;
-            s--;
-        }
 
-        return a;
-    }
-
-    *s = n % 10 + '0';
+    s[i++] = abs(n) % 10 + '0';
 }
