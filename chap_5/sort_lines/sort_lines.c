@@ -1,5 +1,5 @@
 #include "sort_lines.h"
-
+#include "utils.h"
 
 void q_sort(char* v[], int left, int right)
 {
@@ -20,23 +20,5 @@ void q_sort(char* v[], int left, int right)
 
     q_sort(v, left, last-1);
     q_sort(v, last+1, right);
-}
-
-int strcmp(char* s, char* t)
-{
-    while (*s == *t) {
-        s++;
-        t++;
-    }
-
-    return *s - *t;
-}
-
-void swap(char* s[], int i, int j)
-{
-    char* tmp;
-    tmp = s[i];
-    s[i] = s[j];
-    s[j] = tmp;
 }
 
