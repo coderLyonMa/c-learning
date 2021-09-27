@@ -1,0 +1,37 @@
+#include <ctype.h>
+#include <stdio.h>
+
+int atoi(char *s);
+
+int main()
+{
+    printf("%d\n", atoi("123"));
+}
+
+
+
+int atoi(char *s)
+{
+    int i;
+
+    while (isspace(*s))
+        s++;
+
+    int sign = (*s == '-') ? -1 : 1;
+
+    /* same mistake for passing pointer to isdigit, but will not cause CORE DUMP */ 
+    // isdigit(s), s++;// this will not lead to core dump
+    // return -1;
+    /* */
+
+    /* I know s is a pointer, but I don't quite understand why code above will not and code below will */
+    if (!isdigit(s))
+        s++;
+    return -1;
+    /* code here will cause CORE DUMP instead of an comile-time error */
+
+    for (i = 0; *s && isdigit(s); s++)
+        i = i * 10 + (*s - '0');
+
+    return i * sign;
+}
