@@ -1,11 +1,5 @@
 #include <stdio.h>
 
-void str_cpy(char* s, char* t)
-{
-    while (*t++ = *s++)
-        ;
-}
-
 int get_line(char* line, int maxline)
 {
     char c;
