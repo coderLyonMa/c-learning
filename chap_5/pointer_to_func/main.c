@@ -12,9 +12,10 @@
 int main(int argc, char** argv)
 {
     char* lineptr[MAXLINE];
-    int nlines, numeric, reverse;
+    int nlines, numeric, reverse, case_sen;
+    int (*comp)(void*, void*);
 
-    nlines = numeric = reverse = 0;
+    nlines = numeric = reverse = case_sen = 0;
 
     while (--argc > 0 && **++argv == '-')
         while (*(++*argv))
@@ -25,15 +26,26 @@ int main(int argc, char** argv)
             case 'r':
                 reverse = 1;
                 break;
+            case 'f':
+                case_sen = 1;
+                break;
             default:
                 break;
         }
 
+    if (numeric)
+        comp = (int (*)(void*, void*)) num_cmp;
+    else {
+        if (case_sen)
+            comp = (int (*)(void*, void*)) str_fcmp;
+        else
+            comp = (int (*)(void*, void*)) str_cmp;
+    }
 
     nlines = readlines(lineptr, MAX_LEN, MAXLINE);
 
-    q_sort((void**) lineptr, 0, nlines - 1,
-           (int (*)(void*, void*))(numeric ? num_cmp : str_cmp));
+    q_sort((void**) lineptr, 0, nlines - 1, 
+           comp);
 
     if (reverse)
         reverse_arr((void **)lineptr);
