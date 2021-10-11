@@ -1,0 +1,2 @@
+char* alloc(int len);
+
