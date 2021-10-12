@@ -1,31 +1,48 @@
 #include <stdio.h>
-#define MAX_LEN 1000
+#include <debug_macros.h>
+
 #define TABW 8
+#define BUFFSIZE 100
+
+static char buff[BUFFSIZE];
+char* buffp = buff;
+
+int getch(void);
+void ungetch(int c);
+int count_spaces(void);
 
 
 int main()
 {
-    char line[MAX_LEN];
-    int ns, pos, c;
+    int c, pos;
 
-    while ((c = getchar()) != EOF) {
+    pos = 1;
+
+    while ((c = getch()) != EOF) {
         if (c == '\n') {
-            pos = 0;
+            pos = 1;
             putchar(c);
-        }
-        else  if (c == ' ') {
-            ++pos, ++ns;
+        } else if (c == ' ') {
 
-            // if ns eq 1, there's no need for substitution of tab
-            if (ns > 1 && (TABW - ((pos - ns - 1) % TABW)) == ns) {
-                ns = 0;
-                putchar('\t');
-            } else {
+            int ns = 1 + count_spaces();
+            // printd(ns);
+
+            // no tran
+            if (((pos - 1) % TABW) + ns < TABW) {
                 for (; ns > 0; --ns)
-                    putchar(c);
+                    putchar(' '), ++pos;
+            } else {
+                int tabn = (((pos - 1) % TABW) + ns) / TABW;
+                int spacen = (((pos - 1) % TABW) + ns) % TABW;
+
+                for (; tabn > 0; --tabn)
+                    putchar('\t');
+                for (; spacen > 0; --spacen)
+                    putchar(' ');
+                
+                pos += ns;
             }
-        }
-        else {
+        } else {
             ++pos;
             putchar(c);
         }
@@ -34,19 +51,30 @@ int main()
     return 0;
 }
 
-
-int get_line(char* line, int max_len)
+int count_spaces(void)
 {
-    char* line_0 = line;
     int c;
+    int ns = 0;
 
-    while ((c = getchar()) != EOF && c != '\n' && (line - line_0) < max_len - 1)
-        *line++ = c;
+    while ((c = getch()) != EOF && c == ' ')
+        ++ns;
 
-    if (c == '\n')
-        *line++ = c;
+    ungetch(c);
 
-    *line = '\0';
-    return line - line_0;
+    return ns;
 }
+
+int getch(void)
+{
+    return (buffp > buff) ? *--buffp : getchar();
+}
+
+void ungetch(int c)
+{
+    if (buffp >= buff + BUFFSIZE)
+        printf("Buff size exceeded\n");
+    else
+        *buffp++ = c;
+}
+
 
