@@ -1,0 +1,13 @@
+if a char is passed as parameter of a function
+then it might has implicit casting behavior
+
+void ungetch(char c)
+{
+    if (buffp >= buff + BUFFSIZE) {
+        printf("buff overflow\n");
+    } else {
+        *buffp++ = c;
+    }
+}
+
+
