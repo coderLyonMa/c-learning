@@ -40,9 +40,9 @@ int main()
                 ++keyptr->count;
     }
 
-    for (int i = 0; i < NKEYS; ++i) {
-        printf("%12s\t%d\t", keytab[i].word, keytab[i].count);
-        if ((i + 1) % 4 == 0 && i != 0)
+    for (keyptr = keytab; keyptr < keytab + NKEYS; ++keyptr) {
+        printf("%12s\t%d\t", keyptr->word, keyptr->count);
+        if ((keyptr - keytab + 1) % 4 == 0 && keyptr != keytab)
             printf("%c", '\n');
     }
 
