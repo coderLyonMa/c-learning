@@ -30,7 +30,7 @@ int main()
     char word[MAX_W_LEN];
     int c, n;
 
-    while ((c = getword(word, MAX_W_LEN))) {
+    while ((c = getword(word, MAX_W_LEN)) != EOF) {
         if (isalpha(c)) {
             n = binsearch(word, keytab, NKEYS);
             if (n != -1) {
@@ -49,7 +49,7 @@ int main()
 
 int getword(char* word, int max_w_len)
 {
-    char* word_0 = word;
+    char* w = word;
     int c;
 
     while (isspace(c = getch()))
@@ -58,27 +58,21 @@ int getword(char* word, int max_w_len)
     // 有3种情况，c是数字，c是字母，c是其他字符
     // 如果是数字的话，期望后面读到的仍然是数字，如果是字母的话，期望后续读到的仍然是字母
     // 最后退出时，会多读取一个字符，需要将该字符压回输入
-    if (isalpha(c)) {
-        *word++ = c;
-        while ((c = getch()) != EOF && word <= word_0 + max_w_len - 1 && isalpha(c))
-            *word++ = c;
-    } else if (isdigit(c)) {
-        *word++ = c;
-         while ((c = getch()) != EOF && word <= word_0 + max_w_len - 1 && isdigit(c))
-            *word++ = c;
+    if (c != EOF)
+        *w++ = c;
+    if (!isalnum(c)) {
+        *w = '\0';
+        return c;
     }
 
-    if (!isalnum(c) && c != EOF) {
-        while (!isalnum(c = getch()) && c != EOF)
-            ;
+    for (; --max_w_len > 0; ++w)
+        if (!isalnum(*w = getch())) {
+            ungetch(*w);
+            break;
+        }
 
-        if (isalnum(c))
-            ungetch(c);
-    }
-
-    *word = '\0';
-
-    return *word_0;
+    *w = '\0';
+    return *word;
 }
 
 int str_cmp(char* s1, char* s2)
