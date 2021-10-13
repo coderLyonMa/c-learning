@@ -4,6 +4,7 @@
 
     #define printd(expr) printf(#expr ":\t%d\n", expr)
     #define prints(expr) printf(#expr ":\t%s\n", expr)
+    #define printfl(expr) printf(#expr ":\t%g\n", expr)
     
     #define breakpoint(statement) statement; return 0
 
