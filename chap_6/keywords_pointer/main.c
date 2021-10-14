@@ -65,6 +65,7 @@ int getword(char* word, int lim)
     // 单字符的情况
     if (!isalnum(c)) {
         *w = '\0';
+        // 注意，这里返回的是c，而不是*w/*word（考虑到c 为EOF 的情况）
         return c;
     }
 
