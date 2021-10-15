@@ -7,22 +7,36 @@ Nlist* htable[HASHSIZE];
 
 Nlist* install(char*, char*);
 Nlist* lookup(char* name);
+Nlist* undef(char*);
+
 void str_cpy(char* s, char* t);
 int str_len(char* str);
 int str_cmp(char* s1, char* s2);
 char* str_dup(char* str);
 
+struct kv {
+    char* name;
+    char*defn;
+} kv_arr[] = {
+    {"NAME", "foo"},
+    {"AGE", "100" },
+    {"HOBBY", "make money" },
+    {"TEMP", "cool" },
+    {"NLIST", "NLIST" },
+};
+
+#define NKV (sizeof kv_arr / sizeof(struct kv))
 
 int main()
 {
-    Nlist* np = NULL;
+    Nlist* np;
 
-    // 这3个不一定有一个共同的表头（除非他们的hashval是一样的）
-    install("NAME", "lyon");
-    install("AGE", "26");
-    install("HOBBY", "soccer");
+    for (int i = 0; i < NKV; ++i)
+        install(kv_arr[i].name, kv_arr[i].defn);
 
-
+    prints(lookup(kv_arr[2].name)->defn);
+    undef(kv_arr[2].name);
+    printptr(lookup(kv_arr[2].name));
     return 0;
 }
 
@@ -58,6 +72,27 @@ Nlist* install(char* name, char* defn)
 
     return p;
 }
+
+Nlist* undef(char* name)
+{
+    Nlist *head, *p, *target_p;
+    Nlist *former_p;
+    target_p = NULL;
+
+    if ((p = lookup(name)) == NULL)
+        return NULL;
+
+    for (former_p = NULL; former_p; former_p = former_p->next)
+        if (former_p->next == p) {
+            former_p->next = p->next;
+            free((Nlist*) p);
+            return former_p;
+        }
+
+    free((Nlist*) p);
+    return NULL;
+}
+
 
 void str_cpy(char* s, char* t)
 {
