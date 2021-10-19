@@ -12,5 +12,8 @@
     #define b_printd(expr) breakpoint(printd(expr))
     #define b_prints(expr) breakpoint(prints(expr))
 
+    #define prt_and_exec(statement) printf("%s;\n", #statement); statement
+
+    #define CANCEL if (0)
 #endif
 
