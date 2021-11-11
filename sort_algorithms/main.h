@@ -1,1 +1,0 @@
-#define MAX_SIZE 0x1EFFF
